@@ -1,5 +1,5 @@
 ---
-title: 'MetaboLITE: a web-based application for learning principles of  metabolic
+title: 'metaboLITE: a web-based application for learning principles of  metabolic
   modeling'
 author:
 - Michal Stolarczyk, Maureen A. Carey, Jason A. Papin
@@ -29,17 +29,17 @@ Biological modeling is currently a niche technique, the way that flow cytometry,
 
 However, at least basic programming is necessary to use most computational tools, including metabolic models. Thus, learning to program is a major obstacle to obtaining the technical knowledge required to understand if metabolic modeling is the right approach to address your biological question of interest. Accordingly, usage of metabolic modeling is limited to researchers who feel comfortable with programming. 
 
-We developed a tool, named MetaboLITE, to decouple learning to program and learning about genome-scale metabolic modeling. MetaboLITE is a web-based application that visualizes and implements two simple reconstructions (iSIM in **Figure \ref{fig:figure1}**) and an analytic framework used to analyze metabolic reconstructions (**Box 1**). 
+We developed a tool, named metaboLITE, to decouple learning to program and learning about genome-scale metabolic modeling. metaboLITE is a web-based application that visualizes and implements two simple reconstructions (iSIM in **Figure \ref{fig:figure1}**) and an analytic framework used to analyze metabolic reconstructions (**Box 1**). 
 
 ```{r figure1, echo = FALSE, fig.cap="\\label{fig:figure1} iSIM represents mitochondrial metabolism (A). This can also be represented as a network (B) with metabolites in circles and reactions as arrows connect the metabolites. Reactions are named in boxes. This model includes 10 metabolites, 9 reactions, and 9 genes. Panel A adapted from iSIM REFRENCE. ETC = electron transport chain, TCA = tricarboxylic acid cycle.", out.width="75%", fig.align='center'}
 
-knitr::include_graphics("/Users/maureencarey/local_documents/work/metaboLITE/iSIM.png")
+knitr::include_graphics("./iSIM.png")
 
 ```
 
-Importantly, metaboLITE is presented from a biologist’s point of view. With MetaboLITE, the user can perform three *in silico* experiments: (1) changing growth media, (2) knocking out genes, and (3) under/overexpressing enzymes. This simple shift in language retains all precision and accuracy of the technical details but is approachable to biologists. 
+Importantly, metaboLITE is presented from a biologist’s point of view. With metaboLITE, the user can perform three *in silico* experiments: (1) changing growth media, (2) knocking out genes, and (3) under/overexpressing enzymes. This simple shift in language retains all precision and accuracy of the technical details but is approachable to biologists. 
 
-## Using MetaboLITE {-}
+## Using metaboLITE {-}
 
 We recommend readers first visit **iSIM paper ref**, linked *here* as this manuscript builds on the ideas presented there.
 
@@ -51,7 +51,7 @@ We recommend readers first visit **iSIM paper ref**, linked *here* as this manus
 \textbf{Flux balance analysis}, or FBA, is just one analytic approach used with genome-scale metabolic models; however, it is the most common approach. FBA uses linear optimization and calculates steady-state fluxes for a metabolic system. 'Flux' can be thought of as a flow rate or the number of times a reaction is used per unit time, and is often convered to millimoles per gram dry weight per hour (mmol/gDW/h).
 \end{minipage}}
 
-The app is interactive and dynamic presentation of small metabolite networks (**Figure \ref{fig:figure1}**). While picking an experimental setup in metaboLITE, users can select their model or organism of choice, either human mitochondrial metabolism, iSIM, or the core *E. coli* model. Visuals change as simulation results are updated and as the user moves metabolites and reactions in the field of view (see **Supplemental Video**). Help is offered throughout the experience in a help page on the website, as an extra page in the app, and throughout the app in hover windows. Here, we will describe the three kinds of simulations on MetaboLITE.
+The app is interactive and dynamic presentation of small metabolite networks (**Figure \ref{fig:figure1}**). While picking an experimental setup in metaboLITE, users can select their model or organism of choice, either human mitochondrial metabolism, iSIM, or the core *E. coli* model. Visuals change as simulation results are updated and as the user moves metabolites and reactions in the field of view (see **Supplemental Video**). Help is offered throughout the experience in a help page on the website, as an extra page in the app, and throughout the app in hover windows. Here, we will describe the three kinds of simulations on metaboLITE.
 
 ### Simulation 1: Change media {-}
 Microbial growth behavior is dependent on the environment. Thus, a common phenotypic profiling technique involves growing an organism on many media types (*i.e.* using Biolog plates). This can also be done *in silico*. To understand how this is implemented, it is important to understand that models contain spatially information (*e.g.* **Box 2**, reaction 2). A reconstruction typically has an extracellular and an intracellular compartment; models representing a eukaryotic cell’s metabolism may also have additional compartments representing additional organelles or subcellular spaces like the mitochondria. The extracellular compartment represents the most proximal environment (*e.g.* media for free living organisms *in vitro* or host cell for intracellular organisms) and this compartment can be manipulated to represent changes in the growth conditions. 
@@ -92,7 +92,7 @@ knitr::include_graphics("./exchange_rxns.png")
 
 Returning to a media change experiment, we can simulate changes in metabolite availability by changing the bounds on these exchange reactions. After adding these constraints, FBA is performed to quantify the consequences of these changes. The settings for three different media conditions are available: glucose-free media, microaerophilic media (*i.e.* oxygen limited), and lactate-rich media (left, black buttons, **Figure \ref{fig:media}**). By simulating growth on these predefined medias, the user can see how media type affects growth both by visualizing flux on the network and by printing out flux values for each reaction. The user can also change the exchange limits on specific media components using a slider bar (left, 'Select the exchange limits', **Figure \ref{fig:media}**).
 
-```{r media, echo = FALSE, fig.cap="\\label{fig:media} MetaboLITE screen for changing media.", out.width = "7in"}
+```{r media, echo = FALSE, fig.cap="\\label{fig:media} metaboLITE screen for changing media.", out.width = "7in"}
 
 knitr::include_graphics("./change_media.png")
 
@@ -103,7 +103,7 @@ Gene essentiality screens or targeted gene knockouts are also a common *in vitro
 
 If the reaction is essential, the cell cannot grow (or produce whatever else is being measured). If the reaction is nonessential, the network will still be able to grow. Depending on how the model was built, you may be able to interpret the results quantitatively, rather than binary (growth v. no growth). For this simulation in metaboLITE, the user picks an enzyme from a drop down menu (left, **Figure \ref{fig:knockout}**) to visualize and quantify flux throughout the network (right, **Figure \ref{fig:knockout}**).
 
-```{r knockout, echo = FALSE, fig.cap="\\label{fig:knockout} MetaboLITE screen for performing gene knockouts.", out.width = "7in"}
+```{r knockout, echo = FALSE, fig.cap="\\label{fig:knockout} metaboLITE screen for performing gene knockouts.", out.width = "7in"}
 
 knitr::include_graphics("./knockout.png")
 
@@ -137,7 +137,7 @@ The third simulation we present is the integration of transcriptomic data. Expre
 
 Transcriptomic data allows a research to look at expression of all enzymes at once, but single-target studies can also be integrated into these models. If one enzyme or gene is over or underexpressed, the associated reaction can be appropriated constrained to represent this phenotype. To do this, we constrain the maximum and/or minimum flux through a reaction. For this simulation, the user can pick a gene from a drop down menu, and set the expression level on a slider bar (left, **Figure \ref{fig:transcriptomics}**). The app performs FBA given the new constraint before visualizing and printing the results (right, **Figure \ref{fig:transcriptomics}**).
 
-```{r transcriptomics, echo = FALSE, fig.cap="\\label{fig:transcriptomics} MetaboLITE screen for integrating transcriptomic data.", out.width = "7in"}
+```{r transcriptomics, echo = FALSE, fig.cap="\\label{fig:transcriptomics} metaboLITE screen for integrating transcriptomic data.", out.width = "7in"}
 
 knitr::include_graphics("./transcriptomics.png")
 
@@ -152,7 +152,7 @@ Here, we present an approach to communicate modeling concepts to aspiring comput
 Link to the sample video: https://www.dropbox.com/s/hmnfsebz79lfl4h/changeMedia.mov?dl=0
 
 ### Installation {-}
-Users can download MetaboLITE online; instructions for all operating systems (Mac, Windows, and Linux) are found at [michalstolarczyk.github.io/metaboLITE](https://michalstolarczyk.github.io/metaboLITE). Installation takes less than 10 minutes, depending on the user's internet connection. First, the user will download Docker and Kitematic, two freely available packages that bypass the manual installation of the app’s dependencies (*i.e.* the software that runs ‘under the hood’ of MetaboLITE). Kitematic will open as an application and users search for the MetaboLITE by name. MetaboLITE will then open a browser window. A help page and list of relevant references for users are both on the website and in the app itself (**Supplemental Figure \ref{fig:help}**).
+Users can download metaboLITE online; instructions for all operating systems (Mac, Windows, and Linux) are found at [michalstolarczyk.github.io/metaboLITE](https://michalstolarczyk.github.io/metaboLITE). Installation takes less than 10 minutes, depending on the user's internet connection. First, the user will download Docker and Kitematic, two freely available packages that bypass the manual installation of the app’s dependencies (*i.e.* the software that runs ‘under the hood’ of metaboLITE). Kitematic will open as an application and users search for the metaboLITE by name. metaboLITE will then open a browser window. A help page and list of relevant references for users are both on the website and in the app itself (**Supplemental Figure \ref{fig:help}**).
 
 ```{r help, echo = FALSE, fig.cap="\\label{fig:help} A help page is provided in the app (shown) and on its website", out.width = "7in"}
 
@@ -161,7 +161,7 @@ knitr::include_graphics("./help_page.png")
 ```
 
 ### Supplementary code  {-}
-**CO**nstraint-**B**ased **R**econstruction and **A**nalysis (or, COBRA) is an open-source software package used by MetaboLITE to simulate the biological experiments. It is implemented in both MATLAB and Python programming languages and maintained by the openCOBRA community. Consider the following code examples (in python) to recreate the simulations presented in MetaboLITE.
+**CO**nstraint-**B**ased **R**econstruction and **A**nalysis (or, COBRA) is an open-source software package used by metaboLITE to simulate the biological experiments. It is implemented in both MATLAB and Python programming languages and maintained by the openCOBRA community. Consider the following code examples (in python) to recreate the simulations presented in metaboLITE.
 
 For more information, see the documentation for either CobraToolbox (the MATLAB software package) or CobraPy (the python software package), both at [opencobra.github.io](http://opencobra.github.io).\newline\newline
 
@@ -245,10 +245,10 @@ growth = result.f
 ```
 
 ## Acknowledgments {-}
-We would like to thank the members of the Guler and Papin labs for feedback throughout the development of MetaboLITE, especially Kris Rawls, Bonnie Dougherty, and Glynis Kolling.
+We would like to thank the members of the Guler and Papin labs for feedback throughout the development of metaboLITE, especially Kris Rawls, Bonnie Dougherty, and Glynis Kolling.
 
 ## Author contributions {-}
-MAC conceived of the project. MS coded MetaboLITE. MAC wrote the manuscript. All authors provided feedback on the app design, edited manuscript drafts, and approved the manuscript.
+MAC conceived of the project. MS coded metaboLITE. MAC wrote the manuscript. All authors provided feedback on the app design, edited manuscript drafts, and approved the manuscript.
 
 ## Funding {-}
 All authors were supported by NIH 5R21AI119881.
