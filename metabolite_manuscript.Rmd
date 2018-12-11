@@ -25,11 +25,11 @@ knitr::opts_chunk$set(echo = TRUE)
 body {text-align: justify}
 </style>
 
-Biological modeling is currently a niche technique, the way that flow cytometry, microfluidics, and even microscopy once were. However, like flow cytometry, microfluidics, and microscopy, computational modeling is a powerful technique and well-suited to address many biological questions. Modeling approaches, such as genome-scale metabolic modeling, highlight knowledge gaps, generate high-confidence data-driven hypotheses, and contextualize sparse data. Genome-scale metabolic reconstructions are built from genomic data and by inferring function to complete or connect metabolic pathways; these reconstructions are supplemented with data from functional genetic and biochemical studies. These reconstructions represent our best understanding of an organism’s biochemistry and cell biology, and failed predictions illuminate knowledge gaps or unappreciated experimental complexities. A model can be viewed as a framework for storing thousands of hypotheses, such as hypotheses about gene-protein-reaction associations or enzyme function, as well as rigorously evaluating and documenting these hypotheses.
+Biological modeling is currently a niche technique, the way that flow cytometry, microfluidics, and even microscopy once were. However, like flow cytometry, microfluidics, and microscopy, computational modeling is a powerful technique and well-suited to address many biological questions. Modeling approaches, such as genome-scale metabolic modeling, highlight knowledge gaps, generate high-confidence data-driven hypotheses, and contextualize sparse data. Genome-scale metabolic reconstructions are built from genomic data and by inferring function to complete or connect metabolic pathways; these reconstructions are supplemented with data from functional genetic and biochemical studies. Genome-scale metabolic reconstructions represent our best understanding of an organism’s biochemistry and cell biology and can be used to make predictions about the system. These predictions (*e.g.* essential components or pathways usage after changing environmental conditions) are high-confidence hypotheses, but even failed predictions illuminate knowledge gaps or unappreciated experimental complexities. A model can be viewed as a framework for storing thousands of hypotheses, such as hypotheses about gene-protein-reaction associations or enzyme function, as well as rigorously evaluating and documenting these hypotheses.
 
-However, at least basic programming is necessary to use most computational tools, including metabolic models. Thus, learning to program is a major obstacle to obtaining the technical knowledge required to understand if metabolic modeling is the right approach to address your biological question of interest. Accordingly, usage of metabolic modeling is limited to researchers who feel comfortable with programming. 
+However, at least basic programming is necessary to use most computational tools, including metabolic models. Thus, learning to program is a major obstacle to obtaining the technical knowledge required to evaluate a model or to understand if metabolic modeling is the right approach to address your biological question of interest. Accordingly, usage of metabolic modeling is limited to researchers who feel comfortable with programming. This limits the diversity of thought in the metabolic modeling field and generates a barrier to entry for biologists with only experimental and subject matter expertise.
 
-We developed a tool, named metaboLITE, to decouple learning to program and learning about genome-scale metabolic modeling. metaboLITE is a web-based application that visualizes and implements two simple reconstructions (iSIM in **Figure \ref{fig:figure1}**) and an analytic framework used to analyze metabolic reconstructions (**Box 1**). 
+Thus, we developed a tool, named metaboLITE, to decouple learning to program and learning about genome-scale metabolic modeling. metaboLITE is a web-based application that visualizes and implements two small reconstructions (iSIM in **Figure \ref{fig:figure1}**) and an analytic framework used to analyze metabolic reconstructions (**Box 1**). Importantly, metaboLITE is presented from a biologist’s point of view. With metaboLITE, the user can perform three *in silico* experiments: (1) changing growth media, (2) knocking out genes, and (3) under/overexpressing enzymes. This simple shift in language retains all precision and accuracy of the technical details but is approachable to biologists.
 
 ```{r figure1, echo = FALSE, fig.cap="\\label{fig:figure1} iSIM represents mitochondrial metabolism (A). This can also be represented as a network (B) with metabolites in circles and reactions as arrows connect the metabolites. Reactions are named in boxes. This model includes 10 metabolites, 9 reactions, and 9 genes. Panel A adapted from iSIM REFRENCE. ETC = electron transport chain, TCA = tricarboxylic acid cycle.", out.width="75%", fig.align='center'}
 
@@ -37,11 +37,9 @@ knitr::include_graphics("./iSIM.png")
 
 ```
 
-Importantly, metaboLITE is presented from a biologist’s point of view. With metaboLITE, the user can perform three *in silico* experiments: (1) changing growth media, (2) knocking out genes, and (3) under/overexpressing enzymes. This simple shift in language retains all precision and accuracy of the technical details but is approachable to biologists. 
-
 ## Using metaboLITE {-}
 
-We recommend readers first visit **iSIM paper ref**, linked *here* as this manuscript builds on the ideas presented there.
+We recommend readers first visit **iSIM paper ref** as this manuscript builds on the ideas presented there.
 
 \setlength{\fboxsep}{1em}
 \noindent\fbox{\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
@@ -51,14 +49,17 @@ We recommend readers first visit **iSIM paper ref**, linked *here* as this manus
 \textbf{Flux balance analysis}, or FBA, is just one analytic approach used with genome-scale metabolic models; however, it is the most common approach. FBA uses linear optimization and calculates steady-state fluxes for a metabolic system. 'Flux' can be thought of as a flow rate or the number of times a reaction is used per unit time, and is often convered to millimoles per gram dry weight per hour (mmol/gDW/h).
 \end{minipage}}
 
-The app is interactive and dynamic presentation of small metabolite networks (**Figure \ref{fig:figure1}**). While picking an experimental setup in metaboLITE, users can select their model or organism of choice, either human mitochondrial metabolism, iSIM, or the core *E. coli* model. Visuals change as simulation results are updated and as the user moves metabolites and reactions in the field of view (see **Supplemental Video**). Help is offered throughout the experience in a help page on the website, as an extra page in the app, and throughout the app in hover windows. Here, we will describe the three kinds of simulations on metaboLITE.
+The app is interactive and dynamic presentation of small metabolite networks. Users first pick an experimental setup in metaboLITE by selecting a model (*i.e.* organism) of choice. Both a model of human mitochondrial metabolism, iSIM, and a model of core *E. coli* metabolism are preloaded for users. The app home page is shown in **Figure \ref{fig:figure1}**; users pick an experimental setup on this screen. The visual representation of the model changes as simulation results are updated. The user can also moves metabolites and reactions in the field of view (by clicking and dragging) and can zoom in to interesting network features (see **Supplemental Video**). Help is offered throughout the experience in three places: first, there is a help page on the app's information website ([michalstolarczyk.github.io/metaboLITE](https://michalstolarczyk.github.io/metaboLITE)), second, there is an extra help page in the app, and, third, there are hover windows, indicated by question marks, throughout the app. 
+
+Here, we will describe the three kinds of experiments, or simulations, offered on metaboLITE. To emphasize, this app opens in a web browser (*i.e.* Chrome or Safari) and all functionality can be accessed without programming in a point-and-click environment like a website. We have provided code in the *Supplemental Information* for users who are interested in seeing the behind-the-sceens analysis for each experiment.
 
 ### Simulation 1: Change media {-}
-Microbial growth behavior is dependent on the environment. Thus, a common phenotypic profiling technique involves growing an organism on many media types (*i.e.* using Biolog plates). This can also be done *in silico*. To understand how this is implemented, it is important to understand that models contain spatially information (*e.g.* **Box 2**, reaction 2). A reconstruction typically has an extracellular and an intracellular compartment; models representing a eukaryotic cell’s metabolism may also have additional compartments representing additional organelles or subcellular spaces like the mitochondria. The extracellular compartment represents the most proximal environment (*e.g.* media for free living organisms *in vitro* or host cell for intracellular organisms) and this compartment can be manipulated to represent changes in the growth conditions. 
 
-So, in order to change the growth environment, we change constraints on exchange reactions. Exchange reactions represent dynamic features of the extracellular environment, like gas exchange into the media (**Figure \ref{fig:figure2}A**) or a fresh bolus of media (**Figure \ref{fig:figure2}B**). Thus, exchange reactions can reflect a metabolite's availability in media and we can constrain these reactions to represent different sets of nutrient availability.
+Microbial growth behavior is dependent on the environment. Thus, a common phenotypic profiling technique involves growing an organism on many media types (*i.e.* growing on Biolog plates). This can also be done *in silico*. After changing the environmental conditions, we can measure how an organism's growth is affected. 
 
-First, let's discuss constraints (**Box 2**).
+To understand how this is implemented, it is important to understand that models contain spatially information (*e.g.* **Box 2**, reaction 2). A reconstruction typically has an extracellular and an intracellular compartment; models representing a eukaryotic cell’s metabolism may also have additional compartments representing additional organelles or subcellular spaces like the mitochondria. The extracellular compartment represents the most proximal environment (*e.g.* media for free living organisms *in vitro* or host cell for intracellular organisms) and this compartment can be manipulated to represent changes in that environment. 
+
+So, in order to change the growth medium or environment, we change the availability of metabolites in that compartment. This is performed by adding constraints on exchange reactions. Exchange reactions represent dynamic features of the extracellular environment, like gas exchange into the media (**Figure \ref{fig:figure2}A**) or a fresh bolus of media (**Figure \ref{fig:figure2}B**). Thus, exchange reactions can reflect a metabolite's availability in media and we can constrain these reactions to represent different sets of nutrient availability. Constraints (**Box 2**) can change the flow through a reaction.
 
 \setlength{\fboxsep}{1em}
 \noindent\fbox{\begin{minipage}{\dimexpr\textwidth-2\fboxsep-2\fboxrule\relax}
@@ -90,7 +91,7 @@ knitr::include_graphics("./exchange_rxns.png")
 
 ```
 
-Returning to a media change experiment, we can simulate changes in metabolite availability by changing the bounds on these exchange reactions. After adding these constraints, FBA is performed to quantify the consequences of these changes. The settings for three different media conditions are available: glucose-free media, microaerophilic media (*i.e.* oxygen limited), and lactate-rich media (left, black buttons, **Figure \ref{fig:media}**). By simulating growth on these predefined medias, the user can see how media type affects growth both by visualizing flux on the network and by printing out flux values for each reaction. The user can also change the exchange limits on specific media components using a slider bar (left, 'Select the exchange limits', **Figure \ref{fig:media}**).
+Returning to a media change experiment, we can simulate changes in metabolite availability by changing the bounds on these exchange reactions. After adding these constraints, FBA is performed to quantify the consequences of these changes (*i.e.* how they affect growth). The settings for three different media conditions are available: glucose-free media, microaerophilic media (*i.e.* oxygen limited), and lactate-rich media (left, black buttons, **Figure \ref{fig:media}**). By simulating growth on these predefined medias, the user can see how media type affects growth both by visualizing flux on the network and by printing out flux values for each reaction. The user can also change the exchange limits on specific media components using a slider bar (left, 'Select the exchange limits', **Figure \ref{fig:media}**).
 
 ```{r media, echo = FALSE, fig.cap="\\label{fig:media} metaboLITE screen for changing media.", out.width = "7in"}
 
@@ -99,7 +100,8 @@ knitr::include_graphics("./change_media.png")
 ```
 
 ### Simulation 2: Simulate gene knockouts {-}
-Gene essentiality screens or targeted gene knockouts are also a common *in vitro* experiment that can be conducted *in silico*. To simulate such an experiment, we remove a gene and the gene-associated reaction from the network. Following this, we often perform FBA to maximize an objective reaction. This analysis asks the question, an the metabolic system (often a cell) do something without that gene and gene-assiciated reaction? Typically, that *something* is *grow*, but we can set the objective reaction to be any measurable, interpretable biological observation. See **Box 3** to learn about objective reactions.
+
+Gene essentiality screens or targeted gene knockouts are also a common *in vitro* experiment that can be conducted *in silico*. Like in an *in vitro* knockout experiment, to simulate an *in silico* knockout, we remove a gene from the network. This will also remove the gene-associated reaction contained in the model. Following this, we often perform FBA to maximize an objective reaction. This analysis asks the question, can the metabolic system (cell) do something without that gene and gene-assiciated reaction? Typically, that *something* is *grow*, so we set the objective reaction to represent growth. However, we can set the objective reaction to be any measurable, interpretable biological observation. See **Box 3** to learn about objective reactions.
 
 If the reaction is essential, the cell cannot grow (or produce whatever else is being measured). If the reaction is nonessential, the network will still be able to grow. Depending on how the model was built, you may be able to interpret the results quantitatively, rather than binary (growth v. no growth). For this simulation in metaboLITE, the user picks an enzyme from a drop down menu (left, **Figure \ref{fig:knockout}**) to visualize and quantify flux throughout the network (right, **Figure \ref{fig:knockout}**).
 
@@ -133,9 +135,10 @@ If you wanted to see how each reaction would be used to maximize production of \
 \end{minipage}}
 
 ### Simulation 3: Integrate transcriptomic data {-}
-The third simulation we present is the integration of transcriptomic data. Expression data is often used to make a condition-specific model; essentially, expression data is collected from a biological condition and the condition-specific model will be reduced to contain only the metabolic functions for which there is expression data to support that function. Many different algorithms are used to integrate expression data (*e.g.* [@Jensen2011-sb; @Becker2008-wd; @Zur2010-tk]) and handle missing data, expression thresholding, and isozymes differently. However, all approaches are similar in intent: if a gene is expressed, the reaction that is catalyzed by the associated enzyme should be in the condition-specific model. If a gene is not expressed, the associated reactions are less likely to be used. This approach has worked well to represent the metabolism of tissue-specific cell types (*e.g.* [@Shlomi2008-ck]) or particular phenotypes like drug resistant pathogens (*e.g.* [@Carey2017-hx]).
 
-Transcriptomic data allows a research to look at expression of all enzymes at once, but single-target studies can also be integrated into these models. If one enzyme or gene is over or underexpressed, the associated reaction can be appropriated constrained to represent this phenotype. To do this, we constrain the maximum and/or minimum flux through a reaction. For this simulation, the user can pick a gene from a drop down menu, and set the expression level on a slider bar (left, **Figure \ref{fig:transcriptomics}**). The app performs FBA given the new constraint before visualizing and printing the results (right, **Figure \ref{fig:transcriptomics}**).
+The third simulation in metaboLITE is the integration of transcriptomic data. Expression data is often used to make a condition-specific model, or a model that represents a cellular phenotype in a particular condition. Expression data is collected from a biological condition and the condition-specific model will be reduced to contain only the metabolic functions for which there is expression data to support that function. Many different algorithms are used to integrate expression data (*e.g.* [@Jensen2011-sb; @Becker2008-wd; @Zur2010-tk]); each handles missing data, expression thresholding, and isozymes differently. However, all approaches are similar in intent: if a gene is expressed, the reaction that is catalyzed by the associated enzyme should be in the condition-specific model. If a gene is not expressed, the associated reactions are less likely to be used in that condition. This approach has worked well to represent the metabolism of tissue-specific cell types (*e.g.* [@Shlomi2008-ck]) or particular phenotypes like drug resistant pathogens (*e.g.* [@Carey2017-hx]).
+
+Transcriptomic data allows a researcher to look at the expression of all enzymes at once, but single-target studies can also be integrated into these models. If one enzyme or gene is over or underexpressed, the associated reaction can be appropriated constrained to represent this phenotype. To do this, we constrain the maximum and/or minimum flux through a reaction; this is a constrain on the bounds of the reaction (*Box 2*). For this simulation, the user can pick a gene from a drop down menu, and set the expression level on a slider bar (left, **Figure \ref{fig:transcriptomics}**). The app performs FBA given the new constraint before visualizing and printing the results (right, **Figure \ref{fig:transcriptomics}**).
 
 ```{r transcriptomics, echo = FALSE, fig.cap="\\label{fig:transcriptomics} metaboLITE screen for integrating transcriptomic data.", out.width = "7in"}
 
@@ -144,15 +147,20 @@ knitr::include_graphics("./transcriptomics.png")
 ```
 
 ## Conclusion {-}
+
 Here, we present an approach to communicate modeling concepts to aspiring computational biologists, inspired by both a simple metabolic model (iSIM) and the questions we often received when presenting our research to non-modelers. By using a simple reconstruction and web-based interface, we can demonstrate modeling concepts without the use of programming. By decoupling the acts of learning the technical concepts and learning to program, more researchers can be exposed to genome-scale metabolic modeling enabling them to evaluate the utility of this modeling framework for their own biological questions. 
  
 ## Supplementary information {-}
 
 ### Supplementary Video {-}
+
 Link to the sample video: https://www.dropbox.com/s/hmnfsebz79lfl4h/changeMedia.mov?dl=0
 
 ### Installation {-}
-Users can download metaboLITE online; instructions for all operating systems (Mac, Windows, and Linux) are found at [michalstolarczyk.github.io/metaboLITE](https://michalstolarczyk.github.io/metaboLITE). Installation takes less than 10 minutes, depending on the user's internet connection. First, the user will download Docker and Kitematic, two freely available packages that bypass the manual installation of the app’s dependencies (*i.e.* the software that runs ‘under the hood’ of metaboLITE). Kitematic will open as an application and users search for the metaboLITE by name. metaboLITE will then open a browser window. A help page and list of relevant references for users are both on the website and in the app itself (**Supplemental Figure \ref{fig:help}**).
+
+Users can download metaboLITE online; instructions for all operating systems (Mac, Windows, and Linux) are found at [michalstolarczyk.github.io/metaboLITE](https://michalstolarczyk.github.io/metaboLITE). 
+
+Installation takes less than 10 minutes, depending on the user's internet connection. First, the user will download Docker and Kitematic, two freely available packages that bypass the manual installation of the app’s dependencies (*i.e.* the software that runs ‘under the hood’ of metaboLITE). Kitematic will open as an application and users search for the metaboLITE by name. metaboLITE will then open a web browser window. A help page and list of relevant references for users are both on the website and in the app itself (**Supplemental Figure \ref{fig:help}**).
 
 ```{r help, echo = FALSE, fig.cap="\\label{fig:help} A help page is provided in the app (shown) and on its website", out.width = "7in"}
 
@@ -161,11 +169,12 @@ knitr::include_graphics("./help_page.png")
 ```
 
 ### Supplementary code  {-}
+
 **CO**nstraint-**B**ased **R**econstruction and **A**nalysis (or, COBRA) is an open-source software package used by metaboLITE to simulate the biological experiments. It is implemented in both MATLAB and Python programming languages and maintained by the openCOBRA community. Consider the following code examples (in python) to recreate the simulations presented in metaboLITE.
 
-For more information, see the documentation for either CobraToolbox (the MATLAB software package) or CobraPy (the python software package), both at [opencobra.github.io](http://opencobra.github.io).\newline\newline
+For more information, see the documentation for either CobraToolbox (the MATLAB software package) or CobraPy (the python software package), both at [opencobra.github.io](http://opencobra.github.io).
 
-#### Loading a model\newline
+#### Loading a model
 ```{python, eval=FALSE}
 
 import cobra
@@ -182,16 +191,13 @@ print([gene.id for gene in model.genes])
 
 ```
 
-#### Change media\newline
+#### Change media
 ```{python, eval=FALSE}
 
 import cobra
 # working directory should be "path/to/model"
 model = cobra.io.read_sbml_model("iSIM.xml")
 # To change the media composition, first pick a metabolite
-# Print metabolite options
-print([met.name for met in model.metabolites])
-# Select a metabolite
 met_id = 'm04c'
 # Look at the reactions associated with this metabolite
 print(model.metabolites.get_by_id(met_id).reactions)
@@ -207,14 +213,12 @@ growth = result.f
 
 ```
 
-#### Simulate gene knockouts\newline
+#### Simulate gene knockouts
 ```{python, eval=FALSE}
 
 import cobra
 # working directory should be "path/to/model"
 model = cobra.io.read_sbml_model("iSIM.xml")
-# Look at the genes in the model
-print([gene.id for gene in model.genes])
 # Pick a gene to knockout
 gene_id = 'LDH'
 # Knockout gene
@@ -226,7 +230,7 @@ growth = result.f
 
 ```
 
-#### Integrate transcriptomic data\newline
+#### Integrate transcriptomic data
 ```{python, eval=FALSE}
 
 import cobra
